@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using PatchHealthCheck.Models;
+using ServerPostChangeChecks.Models;
 
-namespace PatchHealthCheck.Diffing;
+namespace ServerPostChangeChecks.Diffing;
 
 public static class SnapshotDiffer
 {

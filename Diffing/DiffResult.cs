@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PatchHealthCheck.Diffing;
+namespace ServerPostChangeChecks.Diffing;
 
 public enum DiffKind { Added, Removed, Changed, Warning }
 

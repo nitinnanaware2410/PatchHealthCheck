@@ -8,17 +8,17 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
-using PatchHealthCheck.Collectors;
-using PatchHealthCheck.Diffing;
-using PatchHealthCheck.Models;
-using PatchHealthCheck.Persistence;
-using PatchHealthCheck.Reporting;
+using ServerPostChangeChecks.Collectors;
+using ServerPostChangeChecks.Diffing;
+using ServerPostChangeChecks.Models;
+using ServerPostChangeChecks.Persistence;
+using ServerPostChangeChecks.Reporting;
 
-namespace PatchHealthCheck;
+namespace ServerPostChangeChecks;
 
 public partial class MainWindow : Window
 {
-    private string _snapshotFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "PatchHealthCheck");
+    private string _snapshotFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ServerPostChangeChecks");
     private string? _lastReportPath;
     private DateTime _lastBeforeUtc;
     private DateTime _lastAfterUtc;
@@ -83,7 +83,7 @@ public partial class MainWindow : Window
         var servers = GetServerList();
         if (servers.Count == 0)
         {
-            MessageBox.Show("Add at least one server.", "Patch Health Check", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Add at least one server.", "Server Post Change Checks", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 
@@ -124,7 +124,7 @@ public partial class MainWindow : Window
         var servers = GetServerList();
         if (servers.Count == 0)
         {
-            MessageBox.Show("Add at least one server.", "Patch Health Check", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Add at least one server.", "Server Post Change Checks", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 
@@ -194,7 +194,7 @@ public partial class MainWindow : Window
     {
         if (_lastReportPath == null || !File.Exists(_lastReportPath))
         {
-            MessageBox.Show("No report has been generated yet.", "Patch Health Check", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("No report has been generated yet.", "Server Post Change Checks", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
         Process.Start(new ProcessStartInfo(_lastReportPath) { UseShellExecute = true });

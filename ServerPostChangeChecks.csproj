@@ -6,8 +6,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <AssemblyName>PatchHealthCheck</AssemblyName>
-    <RootNamespace>PatchHealthCheck</RootNamespace>
+    <AssemblyName>ServerPostChangeChecks</AssemblyName>
+    <RootNamespace>ServerPostChangeChecks</RootNamespace>
     <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
     <SelfContained>false</SelfContained>
     <Platforms>AnyCPU;x64</Platforms>

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PatchHealthCheck.Models;
+namespace ServerPostChangeChecks.Models;
 
 public class ServerSnapshot
 {

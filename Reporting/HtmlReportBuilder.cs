@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
-using PatchHealthCheck.Diffing;
+using ServerPostChangeChecks.Diffing;
 
-namespace PatchHealthCheck.Reporting;
+namespace ServerPostChangeChecks.Reporting;
 
 public static class HtmlReportBuilder
 {
@@ -14,12 +14,12 @@ public static class HtmlReportBuilder
         var sb = new StringBuilder();
         sb.Append($@"<!DOCTYPE html>
 <html><head><meta charset='utf-8'>
-<title>Patch Health Check Report</title>
+<title>Server Post Change Checks Report</title>
 <style>
 {Css}
 </style></head><body>
 <div class='wrap'>
-<h1>Patch Health Check Report</h1>
+<h1>Server Post Change Checks Report</h1>
 <div class='meta'>
   <span><b>Before:</b> {beforeUtc.ToLocalTime():g}</span>
   <span><b>After:</b> {afterUtc.ToLocalTime():g}</span>

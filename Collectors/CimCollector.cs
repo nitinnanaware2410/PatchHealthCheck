@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Management;
 using System.Security;
-using PatchHealthCheck.Models;
+using ServerPostChangeChecks.Models;
 
-namespace PatchHealthCheck.Collectors;
+namespace ServerPostChangeChecks.Collectors;
 
 /// <summary>
 /// Collects a point-in-time snapshot from a server using WMI/CIM only (no WinRM, no agent).

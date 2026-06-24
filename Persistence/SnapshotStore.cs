@@ -1,8 +1,8 @@
 using System.IO;
 using System.Text.Json;
-using PatchHealthCheck.Models;
+using ServerPostChangeChecks.Models;
 
-namespace PatchHealthCheck.Persistence;
+namespace ServerPostChangeChecks.Persistence;
 
 public static class SnapshotStore
 {

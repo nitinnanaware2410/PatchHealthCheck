@@ -1,11 +1,11 @@
-<Window x:Class="PatchHealthCheck.MainWindow"
+<Window x:Class="ServerPostChangeChecks.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PatchHealthCheck"
+        xmlns:local="clr-namespace:ServerPostChangeChecks"
         mc:Ignorable="d"
-        Title="Patch Health Check" Height="760" Width="1180"
+        Title="Server Post Change Checks" Height="760" Width="1180"
         Background="#F4F6F8" FontFamily="Segoe UI" Icon="Assets/AppIcon.ico">
     <Window.Resources>
         <Style x:Key="SectionHeader" TargetType="TextBlock">
@@ -38,7 +38,7 @@
         <!-- Left panel: configuration -->
         <Border Grid.Column="0" Background="White" CornerRadius="8" Padding="16">
             <StackPanel>
-                <TextBlock Text="Patch Health Check" FontSize="18" FontWeight="Bold" Foreground="#111827"/>
+                <TextBlock Text="Server Post Change Checks" FontSize="18" FontWeight="Bold" Foreground="#111827"/>
                 <TextBlock Text="Snapshot servers before/after patching and diff the results." FontSize="11" Foreground="#6B7280" Margin="0,2,0,0" TextWrapping="Wrap"/>
 
                 <TextBlock Text="Servers (one per line, or hostname,IP)" Style="{StaticResource SectionHeader}"/>
