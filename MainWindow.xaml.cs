@@ -67,6 +67,12 @@ public partial class MainWindow : Window
         }
     }
 
+    private void Help_Click(object sender, RoutedEventArgs e)
+    {
+        var help = new HelpWindow { Owner = this };
+        help.ShowDialog();
+    }
+
     private void BrowseFolder_Click(object sender, RoutedEventArgs e)
     {
         var dlg = new OpenFolderDialog { InitialDirectory = _snapshotFolder };

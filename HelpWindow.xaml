@@ -1,0 +1,92 @@
+<Window x:Class="ServerPostChangeChecks.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Help - Server Post Change Checks" Height="700" Width="720"
+        Background="#F4F6F8" FontFamily="Segoe UI" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style x:Key="H1" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="Margin" Value="0,18,0,6"/>
+        </Style>
+        <Style x:Key="H2" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#2563EB"/>
+            <Setter Property="Margin" Value="0,12,0,4"/>
+        </Style>
+        <Style x:Key="Body" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Foreground" Value="#374151"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+        </Style>
+        <Style x:Key="Bullet" TargetType="TextBlock" BasedOn="{StaticResource Body}">
+            <Setter Property="Margin" Value="14,0,0,4"/>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel Margin="20">
+        <Button DockPanel.Dock="Bottom" Content="Close" Width="100" HorizontalAlignment="Right"
+                Margin="0,16,0,0" Padding="10,6" Background="#2563EB" Foreground="White"
+                BorderThickness="0" Cursor="Hand" Click="Close_Click"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Text="Server Post Change Checks - Help" FontSize="20" FontWeight="Bold" Foreground="#111827"/>
+                <TextBlock Style="{StaticResource Body}" Text="This tool snapshots a server's state before and after a change (e.g. patching), then highlights exactly what's different - so you can tell at a glance whether the change broke anything." Margin="0,6,0,0"/>
+
+                <TextBlock Text="Recommended workflow" Style="{StaticResource H1}"/>
+                <TextBlock Style="{StaticResource Body}" Text="1. Enter the server(s) you're about to change, and credentials if needed."/>
+                <TextBlock Style="{StaticResource Body}" Text="2. Click 'Capture before Change' - BEFORE you patch/restart/deploy anything."/>
+                <TextBlock Style="{StaticResource Body}" Text="3. Perform your maintenance (patching, config change, reboot, etc.) as normal."/>
+                <TextBlock Style="{StaticResource Body}" Text="4. Come back to this tool (same session or a new one - snapshots are saved to disk) and click 'Capture after Change'."/>
+                <TextBlock Style="{StaticResource Body}" Text="5. Click 'Compare &amp; generate report' to see what changed and get a shareable HTML report."/>
+                <TextBlock Style="{StaticResource Body}" Text="6. Use 'Open last HTML report' to view it in your browser, or send the file to whoever needs to sign off on the change."/>
+
+                <TextBlock Text="What each field and button does" Style="{StaticResource H1}"/>
+
+                <TextBlock Style="{StaticResource H2}" Text="Servers"/>
+                <TextBlock Style="{StaticResource Body}" Text="One hostname or IP per line (or comma-separated). Use 'localhost' to check the machine the tool is running on. 'Import server list from file...' loads a list from a .txt or .csv file instead of typing it."/>
+
+                <TextBlock Style="{StaticResource H2}" Text="Credentials"/>
+                <TextBlock Style="{StaticResource Body}" Text="Leave both fields blank to connect using the Windows account you're currently logged in as - this works if that account already has admin rights on the target servers. Fill in DOMAIN\username and a password only when you need to connect as a different account (e.g. a dedicated service account with rights on the servers being changed). The password is held in memory only for the duration of the capture and is never written to disk."/>
+
+                <TextBlock Style="{StaticResource H2}" Text="Snapshot folder"/>
+                <TextBlock Style="{StaticResource Body}" Text="Where Before/After snapshot data (as JSON) and generated HTML reports are saved. Defaults to your Documents folder. Click '...' to change it - useful if you want snapshots on a shared/network location so a colleague can pick up the 'after' step."/>
+
+                <TextBlock Style="{StaticResource H2}" Text="1. Capture before Change"/>
+                <TextBlock Style="{StaticResource Body}" Text="Connects to every listed server via WMI and records the current state: services, running processes, logged-on users, installed hotfixes, scheduled tasks, pending-reboot flags, uptime, and a basic health check. Run this immediately BEFORE the change."/>
+
+                <TextBlock Style="{StaticResource H2}" Text="2. Capture after Change"/>
+                <TextBlock Style="{StaticResource Body}" Text="Same capture as above, run AFTER the change is complete. You can close the tool between steps 1 and 2 - snapshots are saved to the snapshot folder and reloaded automatically."/>
+
+                <TextBlock Style="{StaticResource H2}" Text="3. Compare &amp; generate report"/>
+                <TextBlock Style="{StaticResource Body}" Text="Requires both a Before and an After snapshot to already exist for a server (captured in steps 1 and 2). Builds the summary grid below and writes an HTML report to the snapshot folder. A server is skipped with a log message if either snapshot is missing."/>
+
+                <TextBlock Style="{StaticResource H2}" Text="Open last HTML report"/>
+                <TextBlock Style="{StaticResource Body}" Text="Opens the most recently generated report in your default browser."/>
+
+                <TextBlock Text="Reading the results" Style="{StaticResource H1}"/>
+                <TextBlock Style="{StaticResource Body}" Text="The Server Summary grid gives a quick per-server overview: change counts by category, current uptime, and a heuristic Health status."/>
+                <TextBlock Style="{StaticResource Bullet}" Text="• Uptime (After): how long the server has been up at the time of the After capture. A reset to a small value usually means it rebooted."/>
+                <TextBlock Style="{StaticResource Bullet}" Text="• Health: a best-effort check (CPU load, free memory, processor queue length, a few critical services) - not a guarantee the server isn't struggling, just a flag worth a second look."/>
+                <TextBlock Style="{StaticResource Body}" Text="The HTML report color-codes every change:" Margin="0,8,0,0"/>
+                <TextBlock Style="{StaticResource Bullet}" Text="• Green rows = something new appeared (service, hotfix, process, etc.)"/>
+                <TextBlock Style="{StaticResource Bullet}" Text="• Red rows (light) = something disappeared or stopped"/>
+                <TextBlock Style="{StaticResource Bullet}" Text="• Orange rows = a value changed (e.g. a service's state or start mode)"/>
+                <TextBlock Style="{StaticResource Bullet}" Text="• Gray rows = informational only (e.g. uptime at each capture) - not a problem by itself"/>
+                <TextBlock Style="{StaticResource Bullet}" Text="• Bold red rows = a Warning - e.g. an unexpected/crash reboot, or the health check found something to review"/>
+                <TextBlock Style="{StaticResource Body}" Text="The report also tries to verify whether a reboot was planned or unexpected by checking the System event log (EventID 1074 = planned restart, EventID 41/6008 = crash or power loss) - useful for confirming a patch reboot went as expected." Margin="0,8,0,0"/>
+
+                <TextBlock Text="Troubleshooting" Style="{StaticResource H1}"/>
+                <TextBlock Style="{StaticResource Bullet}" Text="• A capture fails for a server: check that the WMI/RPC ports (TCP 135 + dynamic range) are reachable from this machine, the Windows Management Instrumentation service is running on the target, and the account used has admin rights there."/>
+                <TextBlock Style="{StaticResource Bullet}" Text="• 'Compare' says a server was skipped: you're missing either the Before or After snapshot for it - re-run the corresponding capture step."/>
+                <TextBlock Style="{StaticResource Bullet}" Text="• Nothing changed in the report: that's a good result - it means the change didn't disturb anything this tool tracks."/>
+
+                <TextBlock Text="" Margin="0,12,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
